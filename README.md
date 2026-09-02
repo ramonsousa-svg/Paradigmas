@@ -26,7 +26,7 @@ Os nomes abaixo são papéis. Substituam `Pessoa 2`, `Pessoa 3` e `Pessoa 4` pel
 
 | Pessoa | Responsabilidade principal | Entregas |
 |---|---|---|
-| **Você** | Implementação técnica e integração | modelagem em C, vetor dinâmico, `malloc`/`free`, navegação, busca/ordenação, integração final e correção de problemas de memória |
+| **Pessoa 1** | Implementação técnica e integração | modelagem em C, vetor dinâmico, `malloc`/`free`, navegação, busca/ordenação, integração final e correção de problemas de memória |
 | **Pessoa 2** | Requisitos e documentação | regras do sistema, casos de uso, decisões de projeto, organização do README e roteiro da apresentação |
 | **Pessoa 3** | Menu e experiência de uso | fluxo do menu, mensagens exibidas, leitura segura de strings/números e validação das entradas |
 | **Pessoa 4** | Testes e qualidade | execução dos testes, casos de fronteira, registro de resultados, revisão dos critérios e apoio à apresentação |
@@ -34,10 +34,10 @@ Os nomes abaixo são papéis. Substituam `Pessoa 2`, `Pessoa 3` e `Pessoa 4` pel
 ### Como as atividades dependem umas das outras
 
 1. Pessoa 2 consolida as regras e o comportamento esperado.
-2. Você define a estrutura do código e a API das funções.
+2. Pessoa 1 define a estrutura do código e a API das funções.
 3. Pessoa 3 implementa/revisa o fluxo de entrada usando essa API.
 4. Pessoa 4 transforma os requisitos em testes, registra falhas e valida as correções.
-5. Você integra a versão final e faz a revisão de ponteiros, limites e memória.
+5. Pessoa 1 integra a versão final e faz a revisão de ponteiros, limites e memória.
 
 Ninguém precisa trabalhar sozinho: dúvidas e mudanças de contrato devem ser registradas na issue ou no pull request correspondente.
 

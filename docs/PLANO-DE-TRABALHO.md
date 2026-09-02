@@ -6,7 +6,7 @@ Entregar um player de músicas em C, com menu de terminal, playlist representada
 
 ## Quadro de atividades
 
-### Você — núcleo técnico e integração
+### Pessoa 1 — núcleo técnico e integração
 
 - definir `typedef struct Musica` e o contrato da playlist;
 - implementar inserção com novo vetor, cópia e `free` do vetor anterior;
@@ -46,7 +46,7 @@ Em cada encontro, cada pessoa responde:
 2. O que farei em seguida?
 3. Estou bloqueado por alguma decisão ou dependência?
 
-Bloqueios técnicos devem ser encaminhados a você; bloqueios de requisito devem ser registrados por Pessoa 2; falhas reproduzíveis devem ir para Pessoa 4.
+Bloqueios técnicos devem ser encaminhados à Pessoa 1; bloqueios de requisito devem ser registrados por Pessoa 2; falhas reproduzíveis devem ir para Pessoa 4.
 
 ## Definition of Done
 
