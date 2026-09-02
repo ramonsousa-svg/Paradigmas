@@ -1,0 +1,13 @@
+# Executáveis gerados localmente
+player
+player.exe
+*.out
+
+# Artefatos de compilação e depuração
+*.o
+*.dSYM/
+*.gch
+
+# Configurações locais de editores
+.vscode/
+.idea/
