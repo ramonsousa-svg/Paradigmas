@@ -57,23 +57,31 @@ Ninguém precisa trabalhar sozinho: dúvidas e mudanças de contrato devem ser r
     └── playlist.h
 ```
 
-## Fluxo de contribuição
+## Fluxo obrigatório de contribuição
 
-Cada pessoa deve trabalhar em uma branch própria, criada a partir de `main`:
+É proibido fazer push direto na `main`. Toda alteração, inclusive documentação, deve seguir este fluxo:
+
+1. atualize a `main` local e crie uma branch própria;
+2. faça as alterações e commits na branch;
+3. publique a branch no GitHub;
+4. abra uma pull request (PR) para `main`;
+5. peça revisão de pelo menos uma pessoa;
+6. só faça merge depois da aprovação e dos testes passarem;
+7. mantenha a branch até confirmar que a `main` está funcionando; depois ela pode ser excluída.
+
+Exemplo:
 
 ```bash
 git switch main
 git pull
 git switch -c nome-da-tarefa
+# trabalhar, testar e fazer commits
+git push -u origin nome-da-tarefa
 ```
 
-Ao terminar:
+Na PR, descreva o objetivo, os arquivos alterados, como testar e possíveis riscos. Se algo quebrar depois do merge, a equipe deve identificar o commit/PR responsável e usar o revert da própria PR para restaurar a versão anterior.
 
-1. faça commits pequenos e com mensagens claras;
-2. atualize a documentação ou os testes quando necessário;
-3. abra um pull request descrevendo o que mudou e como foi testado;
-4. peça revisão de pelo menos uma pessoa;
-5. só faça merge depois de os testes passarem.
+O repositório também deve manter a proteção da `main` configurada para exigir PR e aprovação antes de qualquer merge.
 
 Sugestão de commits: `docs: registra regras da playlist`, `feat: adiciona musica`, `test: cobre limite da playlist`.
 
