@@ -65,8 +65,8 @@ Ninguém precisa trabalhar sozinho: dúvidas e mudanças de contrato devem ser r
 2. faça as alterações e commits na branch;
 3. publique a branch no GitHub;
 4. abra uma pull request (PR) para `main`;
-5. peça revisão de pelo menos uma pessoa;
-6. só faça merge depois da aprovação e dos testes passarem;
+5. peça revisão de pelo menos uma pessoa, quando possível;
+6. confira os testes e faça o merge pela PR;
 7. mantenha a branch até confirmar que a `main` está funcionando; depois ela pode ser excluída.
 
 Exemplo:
@@ -81,7 +81,7 @@ git push -u origin nome-da-tarefa
 
 Na PR, descreva o objetivo, os arquivos alterados, como testar e possíveis riscos. Se algo quebrar depois do merge, a equipe deve identificar o commit/PR responsável e usar o revert da própria PR para restaurar a versão anterior.
 
-O repositório também deve manter a proteção da `main` configurada para exigir PR e aprovação antes de qualquer merge.
+O histórico de branches, PRs e merges deve ser preservado no GitHub para facilitar auditoria e revert de qualquer alteração problemática.
 
 Sugestão de commits: `docs: registra regras da playlist`, `feat: adiciona musica`, `test: cobre limite da playlist`.
 
