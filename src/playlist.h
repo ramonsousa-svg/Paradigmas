@@ -47,4 +47,10 @@ bool playlist_exibir_atual(const Playlist *playlist, FILE *saida);
 /* Lista todas as músicas e marca a música atual com o símbolo '>'. */
 bool playlist_listar(const Playlist *playlist, FILE *saida);
 
+/* Busca um título exato e devolve sua posição; retorna -1 se não encontrar. */
+int playlist_buscar_titulo(const Playlist *playlist, const char *titulo);
+
+/* Ordena a playlist por título e mantém a mesma música como atual. */
+void playlist_ordenar_por_titulo(Playlist *playlist);
+
 #endif
