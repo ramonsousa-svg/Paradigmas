@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
  * Começa a playlist sem alocar memória.
@@ -197,4 +198,76 @@ bool playlist_listar(const Playlist *playlist, FILE *saida)
     }
 
     return true;
+}
+
+/*
+ * Procura um título exatamente igual ao informado.
+ * strcmp compara duas strings; o resultado zero significa que elas são iguais.
+ * O valor -1 representa que nenhuma posição foi encontrada.
+ */
+int playlist_buscar_titulo(const Playlist *playlist, const char *titulo)
+{
+    size_t i;
+
+    if (playlist == NULL || titulo == NULL) {
+        return -1;
+    }
+
+    for (i = 0; i < playlist->total_musicas; i++) {
+        if (strcmp(playlist->musicas[i].titulo, titulo) == 0) {
+            return (int) i;
+        }
+    }
+
+    return -1;
+}
+
+/* Função auxiliar usada pelo qsort para comparar dois títulos. */
+static int comparar_por_titulo(const void *primeiro, const void *segundo)
+{
+    const Musica *musica_a = primeiro;
+    const Musica *musica_b = segundo;
+
+    return strcmp(musica_a->titulo, musica_b->titulo);
+}
+
+/*
+ * Ordena o vetor em ordem alfabética pelo título.
+ * Antes da ordenação, guardamos a música atual para localizar sua nova posição
+ * depois do qsort. Assim, o símbolo '>' continua na música correta.
+ */
+void playlist_ordenar_por_titulo(Playlist *playlist)
+{
+    Musica musica_atual;
+    bool havia_musica_atual;
+    size_t i;
+
+    if (playlist_vazia(playlist)) {
+        return;
+    }
+
+    havia_musica_atual = playlist_atual(playlist) != NULL;
+    if (havia_musica_atual) {
+        musica_atual = *playlist_atual(playlist);
+    }
+
+    qsort(playlist->musicas,
+          playlist->total_musicas,
+          sizeof *playlist->musicas,
+          comparar_por_titulo);
+
+    if (!havia_musica_atual) {
+        return;
+    }
+
+    /* Recupera a posição da mesma música depois da ordenação. */
+    for (i = 0; i < playlist->total_musicas; i++) {
+        if (strcmp(playlist->musicas[i].titulo, musica_atual.titulo) == 0 &&
+            strcmp(playlist->musicas[i].artista, musica_atual.artista) == 0 &&
+            strcmp(playlist->musicas[i].album, musica_atual.album) == 0 &&
+            playlist->musicas[i].ano == musica_atual.ano) {
+            playlist->indice_atual = (int) i;
+            return;
+        }
+    }
 }
