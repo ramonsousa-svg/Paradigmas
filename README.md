@@ -67,7 +67,7 @@ Ninguém precisa trabalhar sozinho: dúvidas e mudanças de contrato devem ser r
 4. abra uma pull request (PR) para `main`;
 5. peça revisão de pelo menos uma pessoa, quando possível;
 6. confira os testes e faça o merge pela PR;
-7. mantenha a branch até confirmar que a `main` está funcionando; depois ela pode ser excluída.
+7. mantenha a branch para preservar o histórico da tarefa e facilitar consultas ou revert futuros.
 
 Exemplo:
 
