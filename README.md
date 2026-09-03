@@ -18,7 +18,7 @@ Construir uma aplicação de linha de comando que gerencie uma playlist de músi
 
 Cada música possui `titulo`, `artista`, `album` e `ano`. A playlist começa vazia, com ponteiro `NULL`, total igual a zero e índice atual igual a `-1`. Cada nova inserção deve criar um vetor maior, copiar os registros existentes e liberar o vetor anterior.
 
-O menu de referência está documentado em [`docs/TESTES.md`](docs/TESTES.md). O passo a passo de cada integrante está em [`docs/GUIA-DA-EQUIPE.md`](docs/GUIA-DA-EQUIPE.md). Os requisitos completos e os exemplos de comportamento estão em [`docs/Paradigmas de Programação - AP1 - Testes para o projeto 3.md`](docs/Paradigmas%20de%20Programação%20-%20AP1%20-%20Testes%20para%20o%20projeto%203.md).
+O menu de referência está documentado em [`docs/TESTES.md`](docs/TESTES.md). O passo a passo de cada integrante está em [`docs/GUIA-DA-EQUIPE.md`](docs/GUIA-DA-EQUIPE.md), e o handoff técnico da Pessoa 1 está em [`docs/HANDOFF-PESSOA1.md`](docs/HANDOFF-PESSOA1.md). Os requisitos completos e os exemplos de comportamento estão em [`docs/Paradigmas de Programação - AP1 - Testes para o projeto 3.md`](docs/Paradigmas%20de%20Programação%20-%20AP1%20-%20Testes%20para%20o%20projeto%203.md).
 
 ## Divisão do trabalho
 
