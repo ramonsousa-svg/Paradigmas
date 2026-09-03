@@ -28,4 +28,7 @@ void playlist_liberar(Playlist *playlist);
 /* Informa se a playlist ainda não possui músicas. */
 bool playlist_vazia(const Playlist *playlist);
 
+/* Adiciona uma música, aumentando o vetor sem perder os registros atuais. */
+bool playlist_adicionar(Playlist *playlist, const Musica *musica);
+
 #endif

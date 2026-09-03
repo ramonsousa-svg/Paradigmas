@@ -1,5 +1,6 @@
 #include "playlist.h"
 
+#include <stdint.h>
 #include <stdlib.h>
 
 /*
@@ -41,4 +42,51 @@ void playlist_liberar(Playlist *playlist)
 bool playlist_vazia(const Playlist *playlist)
 {
     return playlist == NULL || playlist->total_musicas == 0;
+}
+
+/*
+ * Adiciona uma música criando um vetor com uma posição a mais.
+ * Primeiro montamos o novo vetor; só depois liberamos o antigo. Assim, se a
+ * alocação falhar, a playlist original continua intacta.
+ */
+bool playlist_adicionar(Playlist *playlist, const Musica *musica)
+{
+    Musica *novo_vetor;
+    size_t novo_total;
+    size_t i;
+
+    if (playlist == NULL || musica == NULL) {
+        return false;
+    }
+
+    /* Evita que total + 1 estoure o maior valor de size_t. */
+    if (playlist->total_musicas == SIZE_MAX) {
+        return false;
+    }
+
+    novo_total = playlist->total_musicas + 1;
+    novo_vetor = malloc(novo_total * sizeof *novo_vetor);
+    if (novo_vetor == NULL) {
+        return false;
+    }
+
+    /* Copia cada registro existente para o novo vetor. */
+    for (i = 0; i < playlist->total_musicas; i++) {
+        novo_vetor[i] = playlist->musicas[i];
+    }
+
+    /* A nova música entra na primeira posição livre. */
+    novo_vetor[playlist->total_musicas] = *musica;
+
+    /* O vetor antigo não é mais necessário depois da cópia. */
+    free(playlist->musicas);
+    playlist->musicas = novo_vetor;
+    playlist->total_musicas = novo_total;
+
+    /* A primeira música adicionada passa a ser a música atual. */
+    if (playlist->indice_atual == -1) {
+        playlist->indice_atual = 0;
+    }
+
+    return true;
 }
