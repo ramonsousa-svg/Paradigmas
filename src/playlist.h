@@ -31,4 +31,13 @@ bool playlist_vazia(const Playlist *playlist);
 /* Adiciona uma música, aumentando o vetor sem perder os registros atuais. */
 bool playlist_adicionar(Playlist *playlist, const Musica *musica);
 
+/* Avança uma posição; retorna false quando já estamos na última música. */
+bool playlist_proxima(Playlist *playlist);
+
+/* Volta uma posição; retorna false quando já estamos na primeira música. */
+bool playlist_anterior(Playlist *playlist);
+
+/* Devolve a música atual ou NULL quando não há uma posição válida. */
+const Musica *playlist_atual(const Playlist *playlist);
+
 #endif

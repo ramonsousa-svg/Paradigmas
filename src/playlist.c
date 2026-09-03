@@ -90,3 +90,53 @@ bool playlist_adicionar(Playlist *playlist, const Musica *musica)
 
     return true;
 }
+
+/*
+ * Tenta avançar para a próxima música.
+ * Retornar false no limite permite que o menu mostre uma mensagem sem
+ * alterar o índice atual.
+ */
+bool playlist_proxima(Playlist *playlist)
+{
+    if (playlist_vazia(playlist) || playlist->indice_atual < 0) {
+        return false;
+    }
+
+    if ((size_t) playlist->indice_atual + 1 >= playlist->total_musicas) {
+        return false;
+    }
+
+    playlist->indice_atual++;
+    return true;
+}
+
+/*
+ * Tenta voltar para a música anterior.
+ * O índice nunca fica menor que zero.
+ */
+bool playlist_anterior(Playlist *playlist)
+{
+    if (playlist_vazia(playlist) || playlist->indice_atual <= 0) {
+        return false;
+    }
+
+    playlist->indice_atual--;
+    return true;
+}
+
+/*
+ * Retorna um ponteiro para a música atual sem copiar o registro.
+ * O ponteiro é somente para consulta: o chamador não deve liberá-lo.
+ */
+const Musica *playlist_atual(const Playlist *playlist)
+{
+    if (playlist_vazia(playlist) || playlist->indice_atual < 0) {
+        return NULL;
+    }
+
+    if ((size_t) playlist->indice_atual >= playlist->total_musicas) {
+        return NULL;
+    }
+
+    return &playlist->musicas[playlist->indice_atual];
+}
