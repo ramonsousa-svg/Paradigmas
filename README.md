@@ -95,12 +95,22 @@ Sugestão de commits: `docs: registra regras da playlist`, `feat: adiciona music
 - As funções têm responsabilidades claras e nomes compreensíveis.
 - A apresentação consegue explicar as decisões de estado, memória e navegação.
 
-## Compilação
+## Compilação e execução
 
-Quando os arquivos de código forem adicionados, a compilação mínima esperada será:
+Execute os comandos a partir da raiz do projeto, onde ficam `README.md`, `docs/` e `src/`.
 
-```bash
-gcc -std=c11 -Wall -Wextra -Wpedantic -g src/*.c -o player
+No Windows PowerShell:
+
+```powershell
+gcc -std=c11 -Wall -Wextra -Wpedantic -g src/main.c src/playlist.c -o player.exe
+.\player.exe
 ```
 
-Em Linux/macOS, execute com `./player`; no Windows, use `player.exe`.
+Em Linux/macOS ou GitHub Codespaces:
+
+```bash
+gcc -std=c11 -Wall -Wextra -Wpedantic -g src/main.c src/playlist.c -o player
+./player
+```
+
+Se o comando `gcc` não for reconhecido no Windows, é necessário instalar ou configurar um compilador C.
