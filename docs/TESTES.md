@@ -43,3 +43,20 @@ T10: PASSOU / FALHOU — observação:
 Casos adicionais:
 Falhas abertas:
 ```
+#===============================================================================================================
+
+## Registro de Execução
+
+**Data:** 06/09/2026
+**Responsável:** Daniel Fernandes Santos RA:2403844 (Pessoa 4). 
+
+### Compilação de Rigor (-Wall -Wextra -Wpedantic)
+
+```bash
+User@Rem UCRT64 /c/Paradigmas
+$ gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src src/main.c src/playlist.c -o player.exe
+
+User@Rem UCRT64 /c/Paradigmas
+$ ./player.exe
+Playlist inicializada (ponteiro NULL, total = 0, indice atual = -1).
+
