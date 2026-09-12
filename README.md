@@ -1,7 +1,16 @@
 # Player de Músicas — Paradigmas de Programação
 
-Projeto integrador da disciplina **Paradigmas de Programação**, desenvolvido em C para praticar o paradigma imperativo, structs, vetores, funções, ponteiros e memória dinâmica.
+Projeto integrador da disciplina Paradigmas de Programação, desenvolvido em C para praticar o paradigma imperativo, structs, vetores, funções, ponteiros e alocação dinâmica de memória.
 
+Integrantes do Projeto:
+
+Daniel Fernandes Santos - [RA / Matrícula ou Função (opcional)]
+
+Davi Patricio Gimenes - [RA / Matrícula ou Função (opcional)]
+
+Ramon Barbosa de Sousa - [RA / Matrícula ou Função (opcional)]
+
+Welson Ferreira da Cruz - [RA / Matrícula ou Função (opcional)]
 ## Objetivo
 
 Construir uma aplicação de linha de comando que gerencie uma playlist de músicas. O programa permite:
