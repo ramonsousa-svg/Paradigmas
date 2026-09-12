@@ -4,13 +4,13 @@ Projeto integrador da disciplina Paradigmas de Programação, desenvolvido em C 
 
 Integrantes do Projeto:
 
-Daniel Fernandes Santos - [RA / Matrícula ou Função (opcional)]
+Daniel Fernandes Santos 
 
-Davi Patricio Gimenes - [RA / Matrícula ou Função (opcional)]
+Davi Patricio Gimenes 
 
-Ramon Barbosa de Sousa - [RA / Matrícula ou Função (opcional)]
+Ramon Barbosa de Sousa
 
-Welson Ferreira da Cruz - [RA / Matrícula ou Função (opcional)]
+Welson Ferreira da Cruz 
 ## Objetivo
 
 Construir uma aplicação de linha de comando que gerencie uma playlist de músicas. O programa permite:
