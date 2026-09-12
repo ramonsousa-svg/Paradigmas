@@ -1,5 +1,6 @@
 #include "playlist.h"
 
+#include <ctype.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -66,6 +67,9 @@ bool playlist_adicionar(Playlist *playlist, const Musica *musica)
     }
 
     novo_total = playlist->total_musicas + 1;
+    if (novo_total > SIZE_MAX / sizeof *novo_vetor) {
+        return false;
+    }
     novo_vetor = malloc(novo_total * sizeof *novo_vetor);
     if (novo_vetor == NULL) {
         return false;
@@ -229,6 +233,74 @@ static int comparar_por_titulo(const void *primeiro, const void *segundo)
     const Musica *musica_b = segundo;
 
     return strcmp(musica_a->titulo, musica_b->titulo);
+}
+
+/* Busca parcial em título e artista, ignorando maiúsculas e minúsculas. */
+static const char *contem_sem_caixa(const char *texto, const char *termo)
+{
+    const char *p;
+    const char *t;
+
+    for (p = texto; *p != '\0'; p++) {
+        for (t = termo; *t != '\0'; t++) {
+            if (tolower((unsigned char)p[t - termo]) != tolower((unsigned char)*t)) {
+                break;
+            }
+        }
+        if (*t == '\0') {
+            return p;
+        }
+    }
+
+    return NULL;
+}
+
+/*
+ * Busca um trecho no título ou no artista, ignorando maiúsculas e minúsculas.
+ * Preenche posicoes com até maximo posições e devolve quantas encontrou.
+ * termo vazio ou só espaços retorna 0.
+ * ponytail: comparações byte a byte; "Joao" nao casa com "João" (acentos
+ * exigem normalização UTF-8). Upgrade: tabela de equivalência de acentos.
+ */
+size_t playlist_buscar_parcial(const Playlist *playlist, const char *termo,
+                               size_t *posicoes, size_t maximo)
+{
+    size_t i;
+    size_t encontradas = 0;
+
+    if (playlist == NULL || termo == NULL || posicoes == NULL) {
+        return 0;
+    }
+
+    /* Ignora termo vazio ou só espaços. */
+    while (*termo != '\0' && isspace((unsigned char)*termo)) {
+        termo++;
+    }
+    if (*termo == '\0') {
+        return 0;
+    }
+
+    for (i = 0; i < playlist->total_musicas && encontradas < maximo; i++) {
+        if (contem_sem_caixa(playlist->musicas[i].titulo, termo) != NULL ||
+            contem_sem_caixa(playlist->musicas[i].artista, termo) != NULL) {
+            posicoes[encontradas++] = i;
+        }
+    }
+
+    return encontradas;
+}
+
+/*
+ * Define a música atual por posição; retorna false se a posição for inválida.
+ */
+bool playlist_definir_atual(Playlist *playlist, size_t posicao)
+{
+    if (playlist == NULL || posicao >= playlist->total_musicas) {
+        return false;
+    }
+
+    playlist->indice_atual = (int) posicao;
+    return true;
 }
 
 /*

@@ -50,7 +50,17 @@ bool playlist_listar(const Playlist *playlist, FILE *saida);
 /* Busca um título exato e devolve sua posição; retorna -1 se não encontrar. */
 int playlist_buscar_titulo(const Playlist *playlist, const char *titulo);
 
+/*
+ * Busca um trecho no título ou no artista, ignorando maiúsculas e minúsculas.
+ * Preenche posicoes com até maximo posições e devolve quantas encontrou.
+ */
+size_t playlist_buscar_parcial(const Playlist *playlist, const char *termo,
+                               size_t *posicoes, size_t maximo);
+
 /* Ordena a playlist por título e mantém a mesma música como atual. */
 void playlist_ordenar_por_titulo(Playlist *playlist);
+
+/* Define a música atual por posição; retorna false se a posição for inválida. */
+bool playlist_definir_atual(Playlist *playlist, size_t posicao);
 
 #endif

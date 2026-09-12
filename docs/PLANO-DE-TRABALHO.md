@@ -22,6 +22,31 @@ Entregar um player de músicas em C, com menu de terminal, playlist representada
 - documentar as decisões: índice `-1`, playlist vazia, limites e estratégia de alocação;
 - preparar o roteiro da apresentação e a explicação do paradigma imperativo.
 
+#### Situação da entrega da Pessoa 2
+
+Entrega parcial. `ARQUITETURA.md` e `GLOSSARIO.md` descrevem conceitos e contratos. Manter os identificadores Pessoa 1–4 nesta etapa.
+
+- [x] Registrar estado inicial e estratégia de memória em `ARQUITETURA.md`.
+- [x] Registrar tabela de campos abaixo.
+- [x] Consolidar requisitos obrigatórios e relacionar cada um a um teste (`docs/REQUISITOS.md`).
+- [x] Definir contratos de busca e ordenação (`docs/GLOSSARIO.md` — "Contratos decididos").
+- [x] Completar o glossário de funções e a explicação do paradigma imperativo (`docs/GLOSSARIO.md`).
+- [x] Preparar e ensaiar o roteiro da apresentação (`docs/APRESENTACAO.md`).
+- [x] Revisar instruções do README frente à versão final validada (UTF-8 nos menus, link para o roteiro).
+
+#### Campos de `Musica`
+
+| Campo | Tipo em C | Capacidade/regra | Exemplo |
+|---|---|---|---|
+| `titulo` | `char[100]` | Até 99 bytes de texto mais `\0`; obrigatório, não apenas espaços. | `Imagine` |
+| `artista` | `char[100]` | Até 99 bytes de texto mais `\0`; obrigatório, não apenas espaços. | `John Lennon` |
+| `album` | `char[100]` | Até 99 bytes de texto mais `\0`; obrigatório, não apenas espaços. | `Imagine` |
+| `ano` | `int` | Inteiro entre 1900 e 2100, inclusive, conforme validação atual do menu. | `1971` |
+
+Referências: `src/playlist.h` e `src/main.c`. A faixa de anos é uma escolha da implementação a confirmar com a equipe, não uma exigência comprovada do enunciado. Capacidade em bytes não equivale necessariamente a quantidade de caracteres acentuados.
+
+Pendência identificada no review: a leitura aceita 99 bytes + Enter (limite real), mas caracteres acentuados podem ocupar mais de um byte, reduzindo o limite efetivo de caracteres. Validar com Pessoas 3 e 4; nenhuma correção de código nesta etapa.
+
 ### Pessoa 3 — menu, entradas e mensagens
 
 - organizar o menu principal;

@@ -1,7 +1,16 @@
 # Executáveis gerados localmente
 player
 player.exe
+test_add.exe
+test_nav.exe
+test_display.exe
+test_search.exe
+test_fronteira.exe
 *.out
+
+# Artefatos de teste de fronteira
+tmp_*.in
+tmp_*.in.out
 
 # Artefatos de compilação e depuração
 *.o
