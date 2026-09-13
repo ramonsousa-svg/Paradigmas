@@ -58,9 +58,8 @@ static void exibir_menu(void)
 /*
  * Le e valida a opcao do menu.
  *
- * Esta funcao e parecida com ler_numero_intervalo, mas foi separada para
- * permitir mensagens mais especificas, como "Opção invalida" quando o numero
- * nao esta entre 1 e 7.
+ * Usa strtol com as mesmas regras de ler_numero_intervalo, mas com faixa
+ * 1..OPCAO_SAIR e mensagens proprias de "Opção invalida".
  */
 static int ler_opcao_menu(int *opcao)
 {
@@ -96,7 +95,7 @@ static int ler_opcao_menu(int *opcao)
         errno = 0;
         numero = strtol(linha, &fim, 10);
 
-        if (fim == linha || !texto_tem_apenas_espacos_finais(fim)) {
+        if (fim == linha || !texto_vazio(fim)) {
             printf("Entrada inválida. Informe apenas números.\n");
             continue;
         }
@@ -301,19 +300,17 @@ static void listar_pelo_menu(const Playlist *playlist)
         const Musica *musica = &playlist->musicas[i];
         char marcador = i == (size_t)playlist->indice_atual ? '>' : ' ';
 
-        if (musica != NULL) {
-            /*
-             * Os tamanhos negativos em %-20s, %-13s e %-22s alinham as colunas
-             * pela esquerda, deixando a listagem mais legivel no terminal.
-             */
-            printf("%c %zu. %-20s | %-13s | %-22s | %d\n",
-                   marcador,
-                   i + 1,
-                   musica->titulo,
-                   musica->artista,
-                   musica->album,
-                   musica->ano);
-        }
+        /*
+         * Os tamanhos negativos em %-20s, %-13s e %-22s alinham as colunas
+         * pela esquerda, deixando a listagem mais legivel no terminal.
+         */
+        printf("%c %zu. %-20s | %-13s | %-22s | %d\n",
+               marcador,
+               i + 1,
+               musica->titulo,
+               musica->artista,
+               musica->album,
+               musica->ano);
     }
 
     printf("\n(> indica a música atual)\n");
@@ -343,12 +340,10 @@ static void buscar_pelo_menu(Playlist *playlist)
 
     printf("\n--- Buscar Música ---\n");
 
-    /* Rejeita termo vazio: para ver tudo, a pessoa usa a opcao Listar. */
-    do {
-        if (!ler_texto("Termo de busca: ", termo, sizeof termo)) {
-            return;
-        }
-    } while (texto_vazio(termo));
+    /* ler_texto já rejeita termo vazio. */
+    if (!ler_texto("Termo de busca: ", termo, sizeof termo)) {
+        return;
+    }
 
     encontradas = playlist_buscar_parcial(playlist, termo, posicoes, capacidade);
 

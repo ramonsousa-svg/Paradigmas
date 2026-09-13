@@ -147,64 +147,6 @@ const Musica *playlist_atual(const Playlist *playlist)
 }
 
 /*
- * Mostra os campos da música atual.
- * %s é usado para imprimir texto; %d imprime um número inteiro decimal.
- * FILE *saida permite enviar o texto para a tela ou para um arquivo de teste.
- */
-bool playlist_exibir_atual(const Playlist *playlist, FILE *saida)
-{
-    const Musica *musica = playlist_atual(playlist);
-
-    if (musica == NULL || saida == NULL) {
-        return false;
-    }
-
-    fprintf(saida, "Titulo: %s\n", musica->titulo);
-    fprintf(saida, "Artista: %s\n", musica->artista);
-    fprintf(saida, "Album: %s\n", musica->album);
-    fprintf(saida, "Ano: %d\n", musica->ano);
-    fprintf(saida, "Posicao: %d de %zu\n",
-            playlist->indice_atual + 1, playlist->total_musicas);
-
-    return true;
-}
-
-/*
- * Lista o vetor inteiro em sua ordem atual.
- * O marcador '>' aparece somente antes da música que está sendo tocada.
- * %zu imprime um valor do tipo size_t, usado para quantidades e posições.
- */
-bool playlist_listar(const Playlist *playlist, FILE *saida)
-{
-    size_t i;
-
-    if (playlist == NULL || saida == NULL) {
-        return false;
-    }
-
-    if (playlist_vazia(playlist)) {
-        fprintf(saida, "Playlist vazia.\n");
-        return true;
-    }
-
-    fprintf(saida, "--- Playlist ---\n");
-    for (i = 0; i < playlist->total_musicas; i++) {
-        char marcador = i == (size_t) playlist->indice_atual ? '>' : ' ';
-
-        /* %zu imprime a posição, e %s imprime cada campo textual. */
-        fprintf(saida, "%c %zu. %s | %s | %s | %d\n",
-                marcador,
-                i + 1,
-                playlist->musicas[i].titulo,
-                playlist->musicas[i].artista,
-                playlist->musicas[i].album,
-                playlist->musicas[i].ano);
-    }
-
-    return true;
-}
-
-/*
  * Procura um título exatamente igual ao informado.
  * strcmp compara duas strings; o resultado zero significa que elas são iguais.
  * O valor -1 representa que nenhuma posição foi encontrada.

@@ -7,26 +7,29 @@
  * Teste de regressao real: executa o player recompilado com
  * titulos de 98, 99 e 100 bytes e valida a mensagem de excesso
  * e o cadastro bem-sucedido.
+ *
+ * Uso: test_fronteira [caminho-do-player]
+ * O padrao "player.exe" cobre o fluxo Windows do build.ps1.
  */
 static void make_input(const char *title, const char *path)
 {
     FILE *f = fopen(path, "w");
     assert(f);
-    fprintf(f, "1\n%s\nQueen\nAlbum\n1975\n6\n", title);
+    fprintf(f, "1\n%s\nQueen\nAlbum\n1975\n7\n", title);
     fclose(f);
 }
 
-static int run_player(const char *input_path)
+static int run_player(const char *player, const char *input_path)
 {
     char cmd[512];
-    snprintf(cmd, sizeof cmd, "player.exe < %s > %s.out 2>&1", input_path, input_path);
+    snprintf(cmd, sizeof cmd, "\"%s\" < %s > %s.out 2>&1", player, input_path, input_path);
     return system(cmd);
 }
 
 static int check_output(const char *out_path, const char *must, const char *must_not)
 {
     FILE *f = fopen(out_path, "r");
-    char buf[4096];
+    char buf[8192];
     size_t n;
     int ok = 1;
 
@@ -47,22 +50,22 @@ static void fill(char *buf, size_t n, char ch)
     buf[n] = '\0';
 }
 
-static void run_case(const char *label, const char *title, const char *must, const char *must_not, int *ok)
+static void run_case(const char *player, const char *label, const char *title,
+                     const char *must, const char *must_not, int *ok)
 {
     char tmp[64];
-    char out[64];
+    char out[80];
 
     snprintf(tmp, sizeof tmp, "tmp_%s.in", label);
     make_input(title, tmp);
-    if (run_player(tmp) != 0) *ok = 0;
-    memset(out, 0, sizeof out);
-    memcpy(out, tmp, strlen(tmp));
-    memcpy(out + strlen(tmp), ".out", 4);
+    if (run_player(player, tmp) != 0) *ok = 0;
+    snprintf(out, sizeof out, "%s.out", tmp);
     if (!check_output(out, must, must_not)) *ok = 0;
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
+    const char *player = argc > 1 ? argv[1] : "player.exe";
     char title98[99];
     char title99[100];
     char title100[101];
@@ -76,9 +79,12 @@ int main(void)
     assert(strlen(title99) == 99);
     assert(strlen(title100) == 100);
 
-    run_case("98", title98, "Música adicionada com sucesso!", "Entrada muito longa", &ok);
-    run_case("99", title99, "Música adicionada com sucesso!", "Entrada muito longa", &ok);
-    run_case("100", title100, "Entrada muito longa", NULL, &ok);
+    /* Casos validos: musica entra e o programa encerra pela opcao 7. */
+    run_case(player, "98", title98, "Música adicionada com sucesso!",
+             "Entrada muito longa", &ok);
+    run_case(player, "99", title99, "Música adicionada com sucesso!",
+             "Entrada muito longa", &ok);
+    run_case(player, "100", title100, "Entrada muito longa", NULL, &ok);
 
     printf("fronteira: %s\n", ok ? "PASSOU" : "FALHOU");
     return ok ? 0 : 1;

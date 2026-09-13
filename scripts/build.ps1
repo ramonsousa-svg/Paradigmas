@@ -18,7 +18,6 @@ $SrcFiles = "src/main.c", "src/playlist.c", "src/io.c"
 $Tests = @(
     @{Name="test_add";       File="tests/test_playlist_add.c"},
     @{Name="test_nav";       File="tests/test_playlist_navigation.c"},
-    @{Name="test_display";   File="tests/test_playlist_display.c"},
     @{Name="test_search";    File="tests/test_playlist_search_sort.c"},
     @{Name="test_fronteira"; File="tests/test_fronteira_texto.c"}
 )
@@ -44,7 +43,11 @@ foreach ($t in $Tests) {
 $failures = @()
 foreach ($t in $Tests) {
     Write-Host "==> Rodando $($t.Name)" -ForegroundColor Cyan
-    & ".\$($t.Name).exe"
+    if ($t.Name -eq "test_fronteira") {
+        & ".\$($t.Name).exe" ".\player.exe"
+    } else {
+        & ".\$($t.Name).exe"
+    }
     if ($LASTEXITCODE -ne 0) { $failures += $t.Name }
 }
 

@@ -121,7 +121,7 @@ Título sugerido: `docs: consolida requisitos e roteiro da apresentacao`.
 
 ### Critério de conclusão
 
-O programa não trava nem corrompe strings diante dos casos adicionais de `TESTES.md`; o menu corresponde às seis opções do enunciado; o `main` apenas coordena o fluxo.
+O programa não trava nem corrompe strings diante dos casos adicionais de `TESTES.md`; o menu corresponde às seis opções do enunciado mais Buscar (Sair fica por último); o `main` apenas coordena o fluxo.
 
 ### PR
 

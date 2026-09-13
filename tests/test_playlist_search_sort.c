@@ -40,6 +40,15 @@ int main(void)
     n = playlist_buscar_parcial(&playlist, "xyz123", posicoes, sizeof posicoes / sizeof posicoes[0]);
     assert(n == 0);
 
+    /* Busca parcial: truncamento no limite de posicoes. */
+    n = playlist_buscar_parcial(&playlist, "a", posicoes, 1);
+    assert(n == 1);
+    assert(posicoes[0] == 0);
+    n = playlist_buscar_parcial(&playlist, "david", posicoes, 1);
+    assert(n == 1);
+    n = playlist_buscar_parcial(&playlist, "a", posicoes, 0);
+    assert(n == 0);
+
     /* Definir musica atual por posicao valida: Ziggy (indice 0 antes da ordenacao). */
     assert(playlist_definir_atual(&playlist, 0));
     assert(playlist.indice_atual == 0);

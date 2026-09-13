@@ -3,10 +3,11 @@
 
 ## Camadas
 
-- **Núcleo** (`playlist.c/.h`): vetor dinâmico, navegação, busca e ordenação.
+- **Núcleo** (`playlist.c/.h`): vetor dinâmico, navegação, busca e ordenação. Sem impressão: nada de `printf` aqui.
 - **Entrada/saída** (`io.c/.h`): leitura segura de texto e números, compartilhada.
-- **Interface** (`main.c`): menu, mensagens e coordenação das opções.
-- **Testes** (`tests/`): verificação de comportamento do núcleo.
+- **Interface** (`main.c`): menu, mensagens, exibição e listagem formatada.
+- **Testes** (`tests/`): verificação de comportamento do núcleo + fronteira via `player` real.
+- **Build/CI**: `Makefile` (Linux/macOS), `scripts/build.ps1` (Windows), `.github/workflows/ci.yml` (matriz de SO + sanitizadores).
 
 ## Estado
 

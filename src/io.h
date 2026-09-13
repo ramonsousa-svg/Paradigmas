@@ -18,9 +18,6 @@ void remover_quebra_de_linha(char *texto);
 /* Verdadeiro quando o texto esta vazio ou contem apenas espacos. */
 int texto_vazio(const char *texto);
 
-/* Verdadeiro quando o resto da string contem apenas espacos. */
-int texto_tem_apenas_espacos_finais(const char *texto);
-
 /* Le texto com limite; rejeita vazio e excesso. Retorna 1 em sucesso. */
 int ler_texto(const char *rotulo, char *destino, size_t tamanho);
 

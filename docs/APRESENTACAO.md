@@ -69,9 +69,9 @@
 > `false` e o menu mostra uma mensagem de erro. Sem cair em comportamento
 > indefinido.
 >
-> E o `playlist_liberar` é chamado sempre que a pessoa escolhe Sair. Percorre o
-> vetor, chama `free`, devolve `NULL` ao ponteiro e zera os contadores. Sem
-> double-free, sem leak conhecido.
+> E o `playlist_liberar` é chamado sempre que a pessoa escolhe Sair: um `free`
+> devolve o vetor inteiro de uma vez, e os campos da struct voltam ao estado
+> inicial. Sem double-free, sem leak conhecido.
 >
 > *(Nessa hora, roda `player.exe` ao vivo: adiciona duas músicas, usa próxima e
 > anterior, lista. A turma vê a navegação funcionando. ~30s.)*
@@ -90,10 +90,11 @@
 > vira música atual automaticamente; se vier vários, a pessoa escolhe. A regra
 > do limite de 64 com aviso está documentada — não é bug, é contrato.
 >
-> Os testes são cinco: adicionar, navegar, exibir, buscar e ordenar, mais um de
-> fronteira que valida o limite de 99 bytes. Todos passam. Os testes vivem em
-> `tests/` e compilam separados do `main.c` — o que confirma que o núcleo é
-> independente do menu.
+> Os testes são quatro: adicionar (com stress de 1000 inserções), navegar,
+> buscar e ordenar, mais um de fronteira que valida o limite de 99 bytes e o
+> encerramento pela opção 7. Todos passam. Os testes vivem em `tests/` e
+> compilam separados do `main.c` — o que confirma que o núcleo é independente
+> do menu.
 >
 > Então é isso: player de músicas em C, paradigma imperativo na essência,
 > struct com estado bem definido, memória alocada e liberada em par, navegação

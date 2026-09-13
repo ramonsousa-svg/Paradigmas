@@ -14,7 +14,7 @@
 
 Decisões da Pessoa 2 conforme atribuição de "decisões de projeto" (`README.md`). Encerram as perguntas abertas levantadas em brainstorm para a AP1.
 
-### Busca (opção 7)
+### Busca (opção 6)
 
 - **Termo inválido:** vazio ou só espaços é rejeitado, pede nova entrada.
 - **Sem correspondência:** mensagem `Nenhuma musica encontrada para "<termo>"`; a música atual não muda.
@@ -45,8 +45,6 @@ Decisões da Pessoa 2 conforme atribuição de "decisões de projeto" (`README.m
 | `playlist_proxima` | Avança o índice; retorna `false` na última música (índice intacto). |
 | `playlist_anterior` | Recua o índice; retorna `false` na primeira (índice intacto). |
 | `playlist_atual` | Ponteiro somente leitura para a música atual; `NULL` se inválida. |
-| `playlist_exibir_atual` | Imprime campos + posição da atual; `false` se não há música. |
-| `playlist_listar` | Lista todas com `>` marcando a atual; "Playlist vazia." se sem músicas. |
 | `playlist_buscar_titulo` | Posição do título exato (case-sensitive) ou `-1`. |
 | `playlist_buscar_parcial` | Trecho em título/artista, case-insensitive; preenche vetor de posições e retorna a contagem (máx. `maximo`). |
 | `playlist_ordenar_por_titulo` | `qsort` alfabético por título; repõe a música atual na nova posição. |
@@ -59,8 +57,7 @@ Decisões da Pessoa 2 conforme atribuição de "decisões de projeto" (`README.m
 | `linha_estourou_buffer` | Verdadeiro quando o `fgets` não leu a linha inteira. |
 | `limpar_resto_da_linha` | Descarta o restante da linha atual. |
 | `remover_quebra_de_linha` | Remove o `\n` final deixado pelo `fgets`. |
-| `texto_vazio` | Verdadeiro para texto vazio ou só espaços. |
-| `texto_tem_apenas_espacos_finais` | Verdadeiro quando o resto da string é só espaços. |
+| `texto_vazio` | Verdadeiro para texto vazio ou só espaços (também valida o resto após um número). |
 | `ler_texto` | Lê string até `tamanho - 1` bytes; rejeita vazio e excesso. |
 | `ler_numero_intervalo` | Lê inteiro via `strtol`; rejeita não-numérico, fora da faixa e estouro. |
 

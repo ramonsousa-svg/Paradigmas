@@ -37,10 +37,12 @@ Status: consolidado pela Pessoa 2 a partir do enunciado (`docs/Paradigmas de Pro
 
 | Req | Descrição | Estado | Teste |
 |---|---|---|---|
-| E-01 | Busca parcial (título/artista, case-insensitive), opção 7 do menu | Implementada, fora do enunciado | `tests/test_playlist_search_sort.c` |
+| E-01 | Busca parcial (título/artista, case-insensitive), opção 6 do menu | Implementada, fora do enunciado | `tests/test_playlist_search_sort.c` |
 | E-02 | Seleção de resultado vira música atual; 1 resultado seleciona automático | Implementada | `tests/test_playlist_search_sort.c` |
 | E-03 | Busca exata por título (núcleo, sem opção no menu) | Implementada | `tests/test_playlist_search_sort.c` |
 | E-04 | Ordenação por título preservando a atual | Implementada, sem opção no menu | `tests/test_playlist_search_sort.c` |
+
+Nota sobre numeração do menu: o enunciado lista Sair como opção 6; a implementação mantém 1–5 do enunciado, adiciona Buscar como 6 e move Sair para 7 (`docs/REQUISITOS.md` UC-06/UC-07 e `tests/test_fronteira_texto.c` usam 7 para encerrar).
 
 ## Contratos além do enunciado (decididos pela Pessoa 2)
 

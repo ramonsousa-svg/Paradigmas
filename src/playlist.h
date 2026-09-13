@@ -3,7 +3,6 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-#include <stdio.h>
 
 /* Representa uma música cadastrada na playlist. */
 typedef struct {
@@ -40,12 +39,6 @@ bool playlist_anterior(Playlist *playlist);
 
 /* Devolve a música atual ou NULL quando não há uma posição válida. */
 const Musica *playlist_atual(const Playlist *playlist);
-
-/* Exibe os dados da música atual; retorna false quando não há música. */
-bool playlist_exibir_atual(const Playlist *playlist, FILE *saida);
-
-/* Lista todas as músicas e marca a música atual com o símbolo '>'. */
-bool playlist_listar(const Playlist *playlist, FILE *saida);
 
 /* Busca um título exato e devolve sua posição; retorna -1 se não encontrar. */
 int playlist_buscar_titulo(const Playlist *playlist, const char *titulo);

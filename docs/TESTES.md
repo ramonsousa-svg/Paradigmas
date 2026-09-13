@@ -36,7 +36,7 @@ Os testes abaixo são a referência de comportamento para o player. Pessoa 4 dev
 
 ```bash
 User@Rem UCRT64 /c/Paradigmas
-$ gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src src/main.c src/playlist.c -o player.exe
+$ gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src src/main.c src/playlist.c src/io.c -o player.exe
 
 User@Rem UCRT64 /c/Paradigmas
 $ ./player.exe

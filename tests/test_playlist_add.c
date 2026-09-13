@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "playlist.h"
@@ -29,6 +30,22 @@ int main(void)
 
     playlist_liberar(&playlist);
     assert(playlist_vazia(&playlist));
+
+    /* Stress: 1000 insercoes crescem o vetor copiando a cada vez. */
+    for (int i = 0; i < 1000; i++) {
+        Musica m;
+        snprintf(m.titulo, sizeof m.titulo, "Faixa %d", i);
+        snprintf(m.artista, sizeof m.artista, "Artista %d", i);
+        snprintf(m.album, sizeof m.album, "Album %d", i);
+        m.ano = 1900 + (i % 201);
+        assert(playlist_adicionar(&playlist, &m));
+        assert(playlist.total_musicas == (size_t)(i + 1));
+    }
+    assert(playlist.total_musicas == 1000);
+    assert(playlist.indice_atual == 0);
+    assert(strcmp(playlist.musicas[999].titulo, "Faixa 999") == 0);
+
+    playlist_liberar(&playlist);
 
     return 0;
 }

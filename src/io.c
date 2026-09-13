@@ -70,24 +70,6 @@ int texto_vazio(const char *texto)
 }
 
 /*
- * Confere se depois do numero digitado existem somente espacos.
- *
- * Isso impede que entradas como "12abc" sejam aceitas como se fossem apenas
- * o numero 12.
- */
-int texto_tem_apenas_espacos_finais(const char *texto)
-{
-    while (*texto != '\0') {
-        if (!isspace((unsigned char)*texto)) {
-            return 0;
-        }
-        texto++;
-    }
-
-    return 1;
-}
-
-/*
  * Le uma string com limite de tamanho e rejeita entrada vazia ou longa demais.
  *
  * A leitura de texto usa fgets porque ela recebe o tamanho do destino. Isso
@@ -119,7 +101,7 @@ int ler_texto(const char *rotulo, char *destino, size_t tamanho)
             return 0;
         }
 
-        if (strchr(linha, '\n') == NULL && !feof(stdin)) {
+        if (linha_estourou_buffer(linha)) {
             limpar_resto_da_linha();
             printf("Entrada muito longa. Use no maximo %zu caracteres.\n", tamanho - 1);
             continue;
@@ -187,9 +169,9 @@ int ler_numero_intervalo(const char *rotulo, int minimo, int maximo, int *valor)
 
         /*
          * fim == linha: nenhum numero foi lido.
-         * !texto_tem_apenas_espacos_finais(fim): existe texto depois do numero.
+         * !texto_vazio(fim): existe texto depois do numero.
          */
-        if (fim == linha || !texto_tem_apenas_espacos_finais(fim)) {
+        if (fim == linha || !texto_vazio(fim)) {
             printf("Entrada invalida. Informe apenas numeros.\n");
             continue;
         }

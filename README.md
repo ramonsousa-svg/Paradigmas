@@ -88,6 +88,7 @@ Escolha uma opção:
 ```text
 .
 ├── README.md
+├── Makefile
 ├── docs/
 │   ├── PLANO-DE-TRABALHO.md
 │   ├── REQUISITOS.md
@@ -98,6 +99,9 @@ Escolha uma opção:
 │   ├── TESTES.md
 │   ├── Paradigmas de Programação - AP1 - Testes para o projeto 3.md
 │   └── apostila-linguagens-imperativas.pdf
+├── .github/workflows/ci.yml
+├── scripts/
+│   └── build.ps1
 ├── src/
 │   ├── main.c
 │   ├── playlist.c
@@ -106,7 +110,6 @@ Escolha uma opção:
 │   └── io.h
 └── tests/
     ├── test_playlist_add.c
-    ├── test_playlist_display.c
     ├── test_playlist_navigation.c
     ├── test_playlist_search_sort.c
     └── test_fronteira_texto.c
@@ -157,10 +160,13 @@ gcc -std=c11 -Wall -Wextra -Wpedantic -g src/main.c src/playlist.c src/io.c -o p
 ```powershell
 gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src tests/test_playlist_add.c src/playlist.c -o test_add.exe
 gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src tests/test_playlist_navigation.c src/playlist.c -o test_nav.exe
-gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src tests/test_playlist_display.c src/playlist.c -o test_display.exe
 gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src tests/test_playlist_search_sort.c src/playlist.c -o test_search.exe
 gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src tests/test_fronteira_texto.c -o test_fronteira.exe
-.\test_add.exe; .\test_nav.exe; .\test_display.exe; .\test_search.exe; .\test_fronteira.exe
+.\test_add.exe; .\test_nav.exe; .\test_search.exe; .\test_fronteira.exe .\player.exe
 ```
 
-Todos devem terminar sem erro (o teste de fronteira imprime `fronteira: PASSOU`). Em Linux/macOS, troque a extensão e use `./` no lugar de `.\`.
+Todos devem terminar sem erro (o teste de fronteira imprime `fronteira: PASSOU` e recebe o caminho do `player` como argumento). Em Linux/macOS, compile e rode com `make test`.
+
+### CI
+
+`.github/workflows/ci.yml` roda a bateria em ubuntu/macos/windows a cada push/PR, mais um job com ASan/UBSan no Ubuntu.

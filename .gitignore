@@ -1,11 +1,11 @@
 # Executáveis gerados localmente
 player
 player.exe
-test_add.exe
-test_nav.exe
-test_display.exe
-test_search.exe
-test_fronteira.exe
+test_*.exe
+test_add
+test_nav
+test_search
+test_fronteira
 *.out
 
 # Artefatos de teste de fronteira
