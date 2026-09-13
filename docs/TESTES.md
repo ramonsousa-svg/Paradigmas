@@ -41,6 +41,7 @@ $ gcc -std=c11 -Wall -Wextra -Wpedantic -g -I src src/main.c src/playlist.c -o p
 User@Rem UCRT64 /c/Paradigmas
 $ ./player.exe
 Playlist inicializada (ponteiro NULL, total = 0, indice atual = -1).
+```
 
 ![Evidência da Compilação sem Warnings](img/compilacao.png)
 
